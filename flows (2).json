@@ -1,0 +1,236 @@
+[
+    {
+        "id": "59b7063ec4b30568",
+        "type": "mqtt in",
+        "z": "7d7e26c9810359ca",
+        "name": "",
+        "topic": "FIAP/GSHeitor/remedios",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "aae9cd6d9724af15",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "a52b24607aa0bde1",
+                "d1f3e03641739278"
+            ]
+        ]
+    },
+    {
+        "id": "a52b24607aa0bde1",
+        "type": "change",
+        "z": "7d7e26c9810359ca",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.remedios_registrados",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "d2838e614a752bb3"
+            ]
+        ]
+    },
+    {
+        "id": "d2838e614a752bb3",
+        "type": "debug",
+        "z": "7d7e26c9810359ca",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d1f3e03641739278",
+        "type": "function",
+        "z": "7d7e26c9810359ca",
+        "name": "function 1",
+        "func": "var currentDate = new Date();\n\nvar B = {\n    payload: {\n        \"variable\": \"remedios_registrados\",\n        \"unit\": \"unidade\",\n        \"value\": msg.payload.remedios_registrados\n    }\n};\n\nreturn B;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "dd8d1f9f28d2195a"
+            ]
+        ]
+    },
+    {
+        "id": "dd8d1f9f28d2195a",
+        "type": "mqtt out",
+        "z": "7d7e26c9810359ca",
+        "name": "",
+        "topic": "tago/data/post",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0582697ada1f3cdd",
+        "x": 680,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "96d5c8dd68c3a1f1",
+        "type": "mqtt in",
+        "z": "7d7e26c9810359ca",
+        "name": "",
+        "topic": "FIAP/GSHeitor/dias",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "aae9cd6d9724af15",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "91dbf3fa89a21e20",
+                "329d526462ba4143"
+            ]
+        ]
+    },
+    {
+        "id": "91dbf3fa89a21e20",
+        "type": "function",
+        "z": "7d7e26c9810359ca",
+        "name": "function 2",
+        "func": "var currentDate = new Date();\n\nvar A = {\n    payload: {\n        \"variable\": \"dias\",\n        \"unit\": \"dia\",\n        \"value\": msg.payload.dia\n    }\n};\n\nreturn A;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 400,
+        "wires": [
+            [
+                "dd8d1f9f28d2195a"
+            ]
+        ]
+    },
+    {
+        "id": "329d526462ba4143",
+        "type": "change",
+        "z": "7d7e26c9810359ca",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.dia",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "d2838e614a752bb3"
+            ]
+        ]
+    },
+    {
+        "id": "aae9cd6d9724af15",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0582697ada1f3cdd",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt.tago.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
